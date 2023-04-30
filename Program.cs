@@ -11,61 +11,32 @@ namespace Blog
         {
             using var context = new BlogDataContext();
 
+            // context.Users.Add(new User{
+            //    Bio = "9X microsoft MVP",
+            //    Email = "andre@balta.io",
+            //    Image = "https://balta.io",
+            //    Name = "Andre Baltiei",
+            //    PasswordHash = "1234",
+            //    Slug = "andre-baltieri"
+            // });
 
-            // var user = new User
-            // {
-            //     Name = "André Baltieri",
-            //     Slug = "andrebaltieri",
-            //     Email = "andre@balta.io",
-            //     Bio = "9x Microsoft MVP",
-            //     Image = "https://balta.io",
-            //     PasswordHash = "123098457"
-            // };
+            var user = context.Users.FirstOrDefault();
+            var post = new Post{
+               Author = user,
+               Body = "Meu artigo",
+               Category = new Category
+               {
+                    Name = "Backend",
+                    Slug = "backend"
+               },
+               CreateDate = System.DateTime.Now,
+               Slug = "meu-artigo",
+               Summary = "Neste artigo vamos conferir...",
+               Title = "Meu artigo"
+            };
 
-            // var category = new Category
-            // {
-            //     Name = "Backend",
-            //     Slug = "backend"
-            // };
-
-            // var post = new Post
-            // {
-            //     Author = user,
-            //     Category = category,
-            //     Body = "<p>Hello World</P",
-            //     Slug = "comecando-com-ef-core",
-            //     Summary = "Neste artigo vamos aprender EF Core",
-            //     Title = "Começando com EF Core",
-            //     CreateDate = DateTime.Now,
-            //     LastUpdateDate = DateTime.Now
-
-            // };
-
-            // context.Posts.Add(post);
-            // context.SaveChanges();
-
-            // var posts = context
-            //     .Posts
-            //     .AsNoTracking()
-            //     .Include(x=>x.Author)
-            //     .Include(x=>x.Category)
-            //     .OrderByDescending(x=>x.LastUpdateDate)
-            //     .ToList();
-
-            // foreach (var post in posts)
-            //     Console.WriteLine($"{post.Title} escrito por {post.Author?.Name} em {post.Category?.Name}");
-
-            var post = context
-                .Posts
-                // .AsNoTracking()
-                .Include(x => x.Author)
-                .Include(x => x.Category)
-                .OrderByDescending(x=>x.LastUpdateDate)
-                .FirstOrDefault();
-
-            post.Author.Name = "Teste";
-
-            context.Posts.Update(post);
+            context.Posts.Add(post);
+            
             context.SaveChanges();
 
         }
