@@ -10,10 +10,19 @@ namespace Blog
         {
             using (var context = new BlogDataContext())
             {
-                var tag = new Tag {Name = ".NET Core", Slug="netcore"};
-                context.Tags.Add(tag);
+                // var tag = new Tag {Name = ".NET Core", Slug="netcore"};
+                // context.Tags.Add(tag);
+                // context.SaveChanges();
+
+                var tag = context.Tags.FirstOrDefault(x=>x.Id == 2);
+                tag.Name = ".NET";
+                tag.Slug = "dotnet";
+
+                context.Update(tag);
                 context.SaveChanges();
             }
+
+
 
         }
     }
