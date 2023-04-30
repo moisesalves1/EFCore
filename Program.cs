@@ -13,10 +13,11 @@ namespace Blog
             // Eager Loading
             using var context = new BlogDataContext();
 
-            var post = context.Posts
-                .Include(x => x.Author)
-                    .ThenInclude(x=>x.Roles)
-                .Include(x=>x.Category);
+            var posts = context.PostWithTagsCount.ToList();
+            foreach(var item in posts){
+            }
+
+            Console.WriteLine("teste");
 
         }
 
