@@ -21,10 +21,16 @@ namespace Blog
                 // context.Update(tag);
                 // context.SaveChanges();
 
-                var tag = context.Tags.FirstOrDefault(x=>x.Id == 2);
+                // var tag = context.Tags.FirstOrDefault(x=>x.Id == 2);
 
-                context.Remove(tag);
-                context.SaveChanges();
+                // context.Remove(tag);
+                // context.SaveChanges();
+
+                var tags = context.Tags.ToList();
+
+                foreach( var tag in tags){
+                    Console.WriteLine(tag.Name);
+                }
             }
 
 
