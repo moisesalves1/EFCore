@@ -5,25 +5,33 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Blog
 {
-    class Program
+    internal class NewBaseType
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
-            var user = new User 
-            {
-                Bio = "a",
-                Email = "a@a.com",
-                GitHub = "andrebaltieri",
-                Image = "https://",
-                Name = "André Baltieri",
-                PasswordHash = "123",
-                Slug = "andre-baltieri"
-            };
-
+            // Lazy loading
+            // Eager Loading
             using var context = new BlogDataContext();
 
-            context.Users.Add(user);
-            context.SaveChanges();
+            var posts = context.PostWithTagsCount.ToList();
+            foreach(var item in posts){
+            }
+
+            Console.WriteLine("teste");
+
         }
+
+        public static List<Post> GetPosts(BlogDataContext context, int skip = 0, int take = 25){
+            var posts = context
+                .Posts
+                .AsNoTracking()
+                .Skip(skip)
+                .Take(take)
+                .ToList();
+
+            return posts;
+        }
+
     }
+
 }
