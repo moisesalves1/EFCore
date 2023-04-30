@@ -52,8 +52,8 @@ namespace Blog.Data.Mappings
                         .WithMany()
                         .HasForeignKey("UserId")
                         .HasConstraintName("FK_UserRole_UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                )
+                        .OnDelete(DeleteBehavior.Cascade)
+                );
 
         
         }
