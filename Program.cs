@@ -53,6 +53,14 @@ namespace Blog
 
                 // context.Update(tag);
                 // context.SaveChanges();
+
+                var tag = context
+                    .Tags
+                    .AsNoTracking()
+                    .FirstOrDefault(x => x.Id == 29);
+
+                Console.WriteLine(tag?.Name);
+
             }
 
 
