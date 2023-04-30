@@ -9,20 +9,23 @@ namespace Blog
     {
         static async Task Main(string[] args)
         {
+            // Lazy loading
+            // Eager Loading
             using var context = new BlogDataContext();
 
-            var post = await context.Posts.ToListAsync();
-            var tags = await context.Users.ToListAsync();
+            var posts = context.Posts.Include(x=>x.Tags);
+            foreach (var post in posts)
+            {
+                foreach (var tag in post.Tags)
+                {
 
-            var posts = await GetPosts(context);
+                }
+            }
 
-            Console.WriteLine("teste");
+
+
         }
 
-        public static async Task<IEnumerable<Post>> GetPosts(BlogDataContext context)
-        {
-            return await context.Posts.ToListAsync();
-        }
     }
 
 }
